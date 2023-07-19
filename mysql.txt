@@ -1,0 +1,102 @@
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| nikhila            |
+| test               |
++--------------------+
+4 rows in set (0.01 sec)
+
+mysql> desc nikhila;
+ERROR 1046 (3D000): No database selected
+mysql> use nikhila;
+Database changed
+mysql> desc nikhila;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| rollno  | int(10)     | YES  |     | NULL    |       |
+| name    | char(40)    | YES  |     | NULL    |       |
+| Address | char(50)    | YES  |     | NULL    |       |
+| age     | varchar(20) | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql> select* from nikhila;
++--------+----------+------------+------+
+| rollno | name     | Address    | age  |
++--------+----------+------------+------+
+|      1 | soumya   | warangal   | 21   |
+|      2 | akshaya  | karminagar | 20   |
+|      3 | rushitha | kadapa     | 22   |
+|      4 | pavani   | sangareddy | 21   |
++--------+----------+------------+------+
+4 rows in set (0.00 sec)
+
+mysql> update nikhila SET age = "22" where rollno = 3;
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 1  Changed: 0  Warnings: 0
+
+mysql> select* from nikhila;
++--------+----------+------------+------+
+| rollno | name     | Address    | age  |
++--------+----------+------------+------+
+|      1 | soumya   | warangal   | 21   |
+|      2 | akshaya  | karminagar | 20   |
+|      3 | rushitha | kadapa     | 22   |
+|      4 | pavani   | sangareddy | 21   |
++--------+----------+------------+------+
+4 rows in set (0.00 sec)
+
+mysql> update nikhila SET age = "24" where rollno = 3;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select* from nikhila;
++--------+----------+------------+------+
+| rollno | name     | Address    | age  |
++--------+----------+------------+------+
+|      1 | soumya   | warangal   | 21   |
+|      2 | akshaya  | karminagar | 20   |
+|      3 | rushitha | kadapa     | 24   |
+|      4 | pavani   | sangareddy | 21   |
++--------+----------+------------+------+
+4 rows in set (0.00 sec)
+
+mysql> rename table nikhila to nikhi;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> select* from nikhi;
++--------+----------+------------+------+
+| rollno | name     | Address    | age  |
++--------+----------+------------+------+
+|      1 | soumya   | warangal   | 21   |
+|      2 | akshaya  | karminagar | 20   |
+|      3 | rushitha | kadapa     | 24   |
+|      4 | pavani   | sangareddy | 21   |
++--------+----------+------------+------+
+4 rows in set (0.00 sec)
+
+mysql> select user,Host from mysql.user;
++------+-----------+
+| user | Host      |
++------+-----------+
+| root | localhost |
++------+-----------+
+1 row in set (0.00 sec)
+
+mysql> create user "rushitha"@"localhost"identified by "1234";
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> grant all privileges on *.* to "rushitha"@"localhost";
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> show grants for "rushitha"@"localhost";
++--------------------------------------------------------------------------------------------------------------------------+
+| Grants for rushitha@localhost                                                                                            |
++--------------------------------------------------------------------------------------------------------------------------+
+| GRANT ALL PRIVILEGES ON *.* TO 'rushitha'@'localhost' IDENTIFIED BY PASSWORD '*A4B6157319038724E3560894F7F932C8886EBFCF' |
++--------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
